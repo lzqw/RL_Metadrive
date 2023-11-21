@@ -1,0 +1,6 @@
+total_steps,route_completion_normal,crash_rate_normal,route_completion_adv,crash_rate_adv
+25030,-3.5,0.8,-5.0,0.9
+50335,-5.0,1.0,-5.0,0.9
+75418,-5.0,0.5,-5.0,0.9
+100478,-2.0,0.8,-3.5,0.9
+125570,-0.5,0.5,-3.5,0.8
