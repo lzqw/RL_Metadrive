@@ -41,7 +41,7 @@ if __name__ == '__main__':
     parser.add_argument("--seed", default=1,    type=int)
     parser.add_argument("--start_timesteps", default=10000, type=int)  # Time steps initial random policy is used
     parser.add_argument("--eval_freq", default=25000, type=int)  # How often (time steps) we evaluate
-    parser.add_argument("--max_timesteps", default=1e6, type=int)  # Max time steps to run environment
+    parser.add_argument("--max_timesteps", default=3e6, type=int)  # Max time steps to run environment
     parser.add_argument("--save_model", default=True)  # Save model and optimizer parameters
     parser.add_argument("--load_model", default="default")  # Model load file name, "" doesn't load, "default" uses file_name
     parser.add_argument("--discount", default=0.99, type=float)  # Discount factor
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     episode_num = 0
 
     last_eval_step = 0
-
+    action_last=np.zeros(2)
     for t in range(int(args.max_timesteps)):
         episode_timesteps += 1
         if t < args.start_timesteps:
@@ -145,6 +145,8 @@ if __name__ == '__main__':
         next_state, reward, done, truncateds,info = env.step(action)
         if info['arrive_dest']:
             reward+=50
+        reward-=np.linalg.norm(action-action_last)
+        action_last=action
         # return obses, rewards, terminated, truncateds, step_infos
         done_bool = float(done)
         replay_buffer.add(state, action, next_state, reward, done_bool)

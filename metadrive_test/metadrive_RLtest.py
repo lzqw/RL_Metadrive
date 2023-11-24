@@ -8,7 +8,7 @@ from result_plotter.logger import SafeLogger
 from RL_algo import TD3,utils
 
 
-def eval_policy(policy, eval_env, eval_episodes=10):
+def eval_policy(policy, eval_env, eval_episodes=1):
     _rewards = [0.] * eval_episodes
     _costs = [0.] * eval_episodes
 
